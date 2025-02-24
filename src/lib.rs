@@ -2,32 +2,64 @@
 use std::collections::BTreeMap;
 
 use miniscript::bitcoin::{taproot::Signature, Transaction};
+use serde::{Deserialize, Serialize};
 
+#[derive(Debug, Serialize, Deserialize)]
 pub struct Backup {
-    name: Option<String>,
-    accounts: Vec<Account>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub name: Option<String>,
+    pub accounts: Vec<Account>,
     /// App proprietary metadata (settings, configuration, etc..)
-    proprietary: serde_json::Map<String, serde_json::Value>,
+    #[serde(skip_serializing_if = "serde_json::Map::is_empty")]
+    pub proprietary: serde_json::Map<String, serde_json::Value>,
 }
 
+#[derive(Debug, Serialize, Deserialize)]
 pub struct Account {
-    name: Option<String>,
-    descriptor: miniscript::Descriptor<miniscript::DescriptorPublicKey>,
-    timestamp: Option<u64>,
-    keys: BTreeMap<miniscript::DescriptorPublicKey, Key>,
-    labels: bip329::Labels,
-    transactions: Vec<Transaction>,
-    psbts: Vec<miniscript::bitcoin::Psbt>,
-    proprietary: serde_json::Map<String, serde_json::Value>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub name: Option<String>,
+    pub descriptor: miniscript::Descriptor<miniscript::DescriptorPublicKey>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub timestamp: Option<u64>,
+    #[serde(skip_serializing_if = "BTreeMap::is_empty")]
+    pub keys: BTreeMap<miniscript::DescriptorPublicKey, Key>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub labels: Option<bip329::Labels>,
+    #[serde(skip_serializing_if = "Vec::is_empty")]
+    pub transactions: Vec<Transaction>,
+    #[serde(skip_serializing_if = "Vec::is_empty")]
+    pub psbts: Vec<miniscript::bitcoin::Psbt>,
+    #[serde(skip_serializing_if = "serde_json::Map::is_empty")]
+    pub proprietary: serde_json::Map<String, serde_json::Value>,
 }
 
+impl Account {
+    pub fn new(descriptor: miniscript::Descriptor<miniscript::DescriptorPublicKey>) -> Self {
+        Self {
+            name: None,
+            descriptor,
+            timestamp: None,
+            keys: BTreeMap::new(),
+            labels: None,
+            transactions: Vec::new(),
+            psbts: Vec::new(),
+            proprietary: serde_json::Map::new(),
+        }
+    }
+}
+
+#[derive(Debug, Serialize, Deserialize)]
 pub struct Key {
-    key: miniscript::DescriptorPublicKey,
-    alias: Option<String>,
-    role: Option<KeyRole>,
-    key_type: Option<KeyType>,
+    pub key: miniscript::DescriptorPublicKey,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub alias: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub role: Option<KeyRole>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub key_type: Option<KeyType>,
 }
 
+#[derive(Debug, Serialize, Deserialize)]
 pub enum KeyRole {
     /// Key to be used in normal spending condition
     Main,
@@ -39,6 +71,7 @@ pub enum KeyRole {
     Cosigning,
 }
 
+#[derive(Debug, Serialize, Deserialize)]
 pub enum KeyType {
     /// Main user
     Internal,
