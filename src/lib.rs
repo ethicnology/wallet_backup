@@ -1,7 +1,7 @@
 #![allow(unused)]
 use std::collections::BTreeMap;
 
-use miniscript::bitcoin::{taproot::Signature, Transaction};
+use miniscript::bitcoin::{taproot::Signature, Network, Transaction};
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -9,6 +9,7 @@ pub struct Backup {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub name: Option<String>,
     pub accounts: Vec<Account>,
+    pub network: Network,
     /// App proprietary metadata (settings, configuration, etc..)
     #[serde(skip_serializing_if = "serde_json::Map::is_empty")]
     pub proprietary: serde_json::Map<String, serde_json::Value>,

@@ -38,6 +38,7 @@ metadata, multiple accounts, and associated key data.
 - `name`: Optional wallet name
 - `description`: Optional wallet description
 - `accounts`: Array of account objects
+- `network`: The network Bitcoin/Testnet/Signet/Regtest
 - `proprietary`: Optional JSON object storing application-specific metadata
 
 ### Account Object Structure
