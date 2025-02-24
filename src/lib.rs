@@ -25,7 +25,7 @@ pub struct Account {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub timestamp: Option<u64>,
     #[serde(skip_serializing_if = "BTreeMap::is_empty")]
-    pub keys: BTreeMap<miniscript::DescriptorPublicKey, Key>,
+    pub keys: BTreeMap<miniscript::bitcoin::bip32::Fingerprint, Key>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub labels: Option<bip329::Labels>,
     #[serde(skip_serializing_if = "Vec::is_empty")]
@@ -55,7 +55,7 @@ impl Account {
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Key {
-    pub key: miniscript::DescriptorPublicKey,
+    pub key: miniscript::bitcoin::bip32::Fingerprint,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub alias: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]

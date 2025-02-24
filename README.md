@@ -71,7 +71,7 @@ metadata, multiple accounts, and associated key data.
 
 ### Key Object Structure
 
-- `key`: Public key
+- `key`: Public key/Fingerprint
 - `alias`: (optional) User-defined alias
 - `role`: (optional) Defines the role of the key in wallet operations
 - `key_type`: (optional) Defines the ownership type of the key
