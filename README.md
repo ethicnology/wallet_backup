@@ -36,35 +36,51 @@ metadata, multiple accounts, and associated key data.
 ### Wallet Backup Structure
 
 - `name`: Optional wallet name
+- `description`: Optional wallet description
 - `accounts`: Array of account objects
-- `proprietary`: JSON object storing wallet-specific metadata
+- `proprietary`: Optional JSON object storing application-specific metadata
 
 ### Account Object Structure
 
 - `name`: Optional account name
+- `description`: Optional account description
 - `descriptor`: Output descriptor defining the account structure
-- `timestamp`: Optional timestamp indicating account creation
-- `keys`: Dictionary of descriptor keys mapped to metadata
-- `labels`: Labels for transactions, addresses, and keys following BIP-0329
-- `transactions`: List of fully signed transactions
-- `psbts`: List of partially signed Bitcoin transactions
-- `proprietary`: JSON object storing account-specific metadata
+
+  TBD: maybe it should not strictly contain a descriptor but should let room for:
+    - output descriptor (BIP-0380)
+    - wallet policy (BIP-0388)
+    - silent payments
+    - lightning ?
+    - ark ?
+    - any arbitrary representation of metadata needed to find & spend coins for an `account`
+
+- `timestamp`: Optional timestamp indicating account creation time
+- `keys`: Optionnal dictionary of descriptor keys mapped to metadata
+- `labels`: Optinal labels for transactions, addresses, and keys following BIP-0329
+- `transactions`: Optional list of fully confirmed transactions
+
+  TBD: which transactions should be backup? 
+    - only the tx spending coins controlled by the account?
+    - also transactions funding controlled coins? or only the corresponding outpoints?
+
+- `psbts`: Optional List of unspend but (partially) signed transactions
+- `proprietary`: Optional JSON object storing account-specific metadata
 
 ### Key Object Structure
 
 - `key`: Public key
-- `alias`: Optional user-defined alias
-- `role`: Defines the role of the key in wallet operations
-- `key_type`: Defines the ownership type of the key
+- `alias`: (optional) User-defined alias
+- `role`: (optional) Defines the role of the key in wallet operations
+- `key_type`: (optional) Defines the ownership type of the key
 
-### Key Roles
+### Key Roles (enum)
 
 - `main`: Key used for normal spending conditions
 - `recovery`: Key designated for recovery scenarios
 - `inheritance`: Key to inherit funds if the primary user disappears
 - `cosigning`: Key designated for policy-enforcing cosigning
 
-### Key Types
+### Key Types (enum)
 
 - `internal`: Main user-owned key
 - `external`: Heirs or trusted individuals
@@ -80,9 +96,9 @@ to their internal structures.
 
 ## Security Considerations
 
-- The backup format does not include private keys to avoid unintended 
+- The backup format should not include private keys to avoid unintended 
 key exposure.
-- Users should encrypt backups at rest to prevent unauthorized access.
+- Backup should be encrypted to prevent unauthorized access.
 - Care should be taken to ensure that proprietary metadata does not 
 contain sensitive information.
 
