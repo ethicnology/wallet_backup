@@ -55,6 +55,8 @@ metadata, multiple accounts, and associated key data.
     - ark ?
     - any arbitrary representation of metadata needed to find & spend coins for an `account`
 
+- `receive_index`: Optional max receive index of generated receive address
+- `change`: Optional max receive index of generated change address
 - `timestamp`: Optional timestamp indicating account creation time
 - `keys`: Optionnal dictionary of descriptor keys mapped to metadata
 - `labels`: Optinal labels for transactions, addresses, and keys following BIP-0329
