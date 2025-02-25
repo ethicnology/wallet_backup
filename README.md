@@ -45,6 +45,7 @@ metadata, multiple accounts, and associated key data.
 
 - `name`: Optional account name
 - `description`: Optional account description
+- `active`: Optional field to notify if a the account is active
 - `descriptor`: Output descriptor defining the account structure
 
   TBD: maybe it should not strictly contain a descriptor but should let room for:

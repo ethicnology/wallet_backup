@@ -20,6 +20,7 @@ pub struct Account {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub name: Option<String>,
     pub descriptor: miniscript::Descriptor<miniscript::DescriptorPublicKey>,
+    pub active: bool,
     pub receive_index: Option<u64>,
     pub change_index: Option<u64>,
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -41,6 +42,7 @@ impl Account {
         Self {
             name: None,
             descriptor,
+            active: true,
             receive_index: None,
             change_index: None,
             timestamp: None,
