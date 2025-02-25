@@ -45,34 +45,34 @@ metadata, multiple accounts, and associated key data.
 
 - `name`: Optional account name
 - `description`: Optional account description
-- `active`: Optional field to notify if a the account is active
+- `active`: Optional field to notify if the account is active
 - `descriptor`: Output descriptor defining the account structure
 
-  TBD: maybe it should not strictly contain a descriptor but should let room for:
+  TBD: It may not strictly contain a descriptor but should allow room for:
     - output descriptor (BIP-0380)
     - wallet policy (BIP-0388)
     - silent payments
-    - lightning ?
-    - ark ?
+    - lightning?
+    - ark?
     - any arbitrary representation of metadata needed to find & spend coins for an `account`
 
-- `receive_index`: Optional max receive index of generated receive address
-- `change`: Optional max receive index of generated change address
+- `receive_index`: Optional maximum receive index for generated receive addresses
+- `change`: Optional maximum receive index for generated change addresses
 - `timestamp`: Optional timestamp indicating account creation time
-- `keys`: Optionnal dictionary of descriptor keys mapped to metadata
-- `labels`: Optinal labels for transactions, addresses, and keys following BIP-0329
+- `keys`: Optional dictionary of descriptor keys mapped to metadata
+- `labels`: Optional labels for transactions, addresses, and keys following BIP-0329
 - `transactions`: Optional list of fully confirmed transactions
 
-  TBD: which transactions should be backup? 
-    - only the tx spending coins controlled by the account?
-    - also transactions funding controlled coins? or only the corresponding outpoints?
+  TBD: Which transactions should be backed up?
+    - Only the transactions spending coins controlled by the account?
+    - Also, transactions funding controlled coins? Or only the corresponding outpoints?
 
-- `psbts`: Optional List of unspend but (partially) signed transactions
+- `psbts`: Optional list of unspent but (partially) signed transactions
 - `proprietary`: Optional JSON object storing account-specific metadata
 
 ### Key Object Structure
 
-- `key`: Public key/Fingerprint
+- `key`: Public key/fingerprint
 - `alias`: (optional) User-defined alias
 - `role`: (optional) Defines the role of the key in wallet operations
 - `key_type`: (optional) Defines the ownership type of the key
@@ -110,5 +110,4 @@ contain sensitive information.
 
 This format is extensible and allows future additions without breaking 
 compatibility. Wallets may choose to ignore fields they do not recognize 
-while maintaining structural integrity of the backup.
-
+while maintaining the structural integrity of the backup.
