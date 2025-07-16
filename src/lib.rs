@@ -18,6 +18,8 @@ pub struct Backup {
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Account {
     #[serde(skip_serializing_if = "Option::is_none")]
+    pub version: Option<u32>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub name: Option<String>,
     pub descriptor: miniscript::Descriptor<miniscript::DescriptorPublicKey>,
     pub active: bool,
@@ -42,6 +44,7 @@ pub struct Account {
 impl Account {
     pub fn new(descriptor: miniscript::Descriptor<miniscript::DescriptorPublicKey>) -> Self {
         Self {
+            version: None,
             name: None,
             descriptor,
             active: true,

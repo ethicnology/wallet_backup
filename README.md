@@ -35,6 +35,7 @@ metadata, multiple accounts, and associated key data.
 
 ### Wallet Backup Structure
 
+- `version`: Optionnal version of the backup format
 - `name`: Optional wallet name
 - `description`: Optional wallet description
 - `accounts`: Array of account objects
