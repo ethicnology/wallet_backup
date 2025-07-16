@@ -68,6 +68,11 @@ metadata, multiple accounts, and associated key data.
     - Also, transactions funding controlled coins? Or only the corresponding outpoints?
 
 - `psbts`: Optional list of unspent but (partially) signed transactions
+- `bip39_mnemonic`: Optional mnemonic words following bip39
+
+  Note: the purpose of such backup is to potentially to be stored online, so storing
+  mainnet mnemonics is strongly discouraged.
+
 - `proprietary`: Optional JSON object storing account-specific metadata
 
 ### Key Object Structure

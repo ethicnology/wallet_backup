@@ -33,6 +33,8 @@ pub struct Account {
     pub transactions: Vec<Transaction>,
     #[serde(skip_serializing_if = "Vec::is_empty")]
     pub psbts: Vec<miniscript::bitcoin::Psbt>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub bip39_mnemonic: Option<bip39::Mnemonic>,
     #[serde(skip_serializing_if = "serde_json::Map::is_empty")]
     pub proprietary: serde_json::Map<String, serde_json::Value>,
 }
@@ -50,6 +52,7 @@ impl Account {
             labels: None,
             transactions: Vec::new(),
             psbts: Vec::new(),
+            bip39_mnemonic: None,
             proprietary: serde_json::Map::new(),
         }
     }
