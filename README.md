@@ -82,6 +82,8 @@ metadata, multiple accounts, and associated key data.
 - `alias`: (optional) User-defined alias
 - `role`: (optional) Defines the role of the key in wallet operations
 - `key_type`: (optional) Defines the ownership type of the key
+- `key_status`: (optional) Status of the key (active/inactive/revoked)
+- `bip85_derivation_path`: (optionnal) the bip85 path used to derived this key from the master key
 
 ### Key Roles (enum)
 
@@ -95,6 +97,12 @@ metadata, multiple accounts, and associated key data.
 - `internal`: Main user-owned key
 - `external`: Heirs or trusted individuals
 - `third_party`: Keys held by a service provider
+
+### Key Status (enum)
+
+- `active`: The key is actively used
+- `inactive`: The key is not (yet) actively used
+- `revoked`: The key have been revoked and MUST not be used anymore
 
 ## Importing
 

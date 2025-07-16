@@ -70,6 +70,10 @@ pub struct Key {
     pub role: Option<KeyRole>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub key_type: Option<KeyType>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub key_status: Option<KeyStatus>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub bip85_derivation_path: Option<miniscript::bitcoin::bip32::DerivationPath>,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -92,4 +96,11 @@ pub enum KeyType {
     External,
     /// Service the user pay for
     ThirdParty,
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+pub enum KeyStatus {
+    Active,
+    Inactive,
+    Revoked,
 }
