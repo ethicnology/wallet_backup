@@ -58,7 +58,7 @@ metadata, multiple accounts, and associated key data.
     - any arbitrary representation of metadata needed to find & spend coins for an `account`
 
 - `receive_index`: Optional maximum receive index for generated receive addresses
-- `change`: Optional maximum receive index for generated change addresses
+- `change_index`: Optional maximum change index for generated change addresses
 - `timestamp`: Optional timestamp indicating account creation time
 - `keys`: Optional dictionary of descriptor keys mapped to metadata
 - `labels`: Optional labels for transactions, addresses, and keys following BIP-0329
